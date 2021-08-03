@@ -18,10 +18,12 @@ $_users = $items->getUsers();
 <div class="row">
 
     <?php foreach ($_users as $user) : ?>
-        <?php $updateUrl = "update.php?user=" . $user->id; ?>
+        <?php $updateUrl = "update.php?user=" . $user->id;
+        $src = $user->avatar;
+        ?>
         <div class="col-sm-6">
             <div class="card">
-                <img class="card-img-top" src="..." alt="Card image cap">
+                <img class="card-img-top"  src="<?php echo  $src ?>" alt="Card image cap">
 
                 <div class="card-body">
                     <h5 class="card-title"><?php echo  $user->name . " " . $user->last_name ?></h5>

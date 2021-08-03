@@ -27,9 +27,23 @@ class UserController
 
     public function getUserById($id)
     {
-        $sqlQuery = "SELECT * FROM " . self::TABLE . "WHERE id =$id";
+        $sqlQuery = "SELECT * FROM users WHERE id=$id";
         $stmt = $this->connection->prepare($sqlQuery);
         $stmt->execute();
-        return  $stmt->fetch(PDO::FETCH_OBJ);
+        return  $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function updateUser($id, $data)
+    {
+
+        $sql = "UPDATE users SET name=?, last_name=?, email=?, phone_number=?, dob=?, bio=?, avatar=? WHERE id=?";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute(
+            [
+                $data["name"], $data["last_name"], $data["email"], $data["phone_number"],
+                $data["dob"], $data["bio"], $data["avatar"], $id
+            ]
+        );
+        return $stmt;
     }
 }
